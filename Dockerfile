@@ -19,5 +19,6 @@ COPY --from=okteto /usr/local/bin/okteto /usr/local/bin/okteto
 COPY --from=okteto /usr/local/bin/helm /usr/local/bin/helm
 
 ENV HOME /root
+VOLUME /root
 EXPOSE 8080
 CMD ["sh", "-c", "/usr/local/bin/gotty --permit-write --reconnect /bin/bash"]
