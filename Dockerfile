@@ -2,7 +2,7 @@ FROM okteto/cloudbin:1.8.39 as okteto
 
 FROM alpine:3 as build
 
-RUN apk add go git
+RUN apk add go git rclone aria2
 RUN mkdir -p /tmp/gotty 
 RUN GOPATH=/tmp/gotty go get github.com/yudai/gotty 
 RUN mv /tmp/gotty/bin/gotty /usr/local/bin/ 
@@ -19,6 +19,5 @@ COPY --from=okteto /usr/local/bin/okteto /usr/local/bin/okteto
 COPY --from=okteto /usr/local/bin/helm /usr/local/bin/helm
 
 ENV HOME /root
-VOLUME /root
 EXPOSE 8080
 CMD ["sh", "-c", "/usr/local/bin/gotty --permit-write --reconnect /bin/bash"]
